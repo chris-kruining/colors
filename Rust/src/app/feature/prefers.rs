@@ -1,8 +1,8 @@
 use core::fmt;
 use leptos::*;
-use leptos_meta::{Meta, MetaProps};
-use leptos_router::{ActionForm, ActionFormProps};
+use serde::{Serialize, Deserialize};
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ReducedMotion {
     NoPreference,
     Reduce,
@@ -17,6 +17,7 @@ impl fmt::Display for ReducedMotion {
     }
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Contrast {
     NoPreference,
     More,
@@ -35,6 +36,7 @@ impl fmt::Display for Contrast {
     }
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ColorScheme {
     NoPreference,
     Dark,
@@ -51,6 +53,7 @@ impl fmt::Display for ColorScheme {
     }
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum ForcedColors {
     NoPreference,
     Active,
@@ -65,6 +68,7 @@ impl fmt::Display for ForcedColors {
     }
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum Prefers {
     Contrast(Contrast),
     ColorScheme(ColorScheme),
@@ -82,11 +86,13 @@ impl fmt::Display for Prefers {
 }
 
 #[server(PrefersHeaders, "/api")]
-pub async fn prefers_headers(cx: Scope) -> Result<bool, ServerFnError> {
+pub async fn prefers_headers(cx: Scope, value: Prefers) -> Result<bool, ServerFnError> {
     use actix_web::HttpRequest;
 
     if let Some(request) = use_context::<HttpRequest>(cx) {
         println!("WOOT");
+    
+        dbg!(value);
     }
 
     Ok(false)

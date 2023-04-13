@@ -1,9 +1,11 @@
 pub mod feature;
+pub mod route;
 
 use crate::app::feature::{
     dark_mode_toggle::{DarkModeToggle, DarkModeToggleProps},
     prefers::PrefersHeaders,
 };
+use crate::app::route::main::{Main, MainProps};
 use cfg_if::cfg_if;
 use leptos::*;
 use leptos_meta::*;
@@ -28,8 +30,6 @@ pub fn App(cx: Scope) -> impl IntoView {
         }
     }
 
-    let prefers_headers_action = create_server_action::<PrefersHeaders>(cx);
-
     view! {
         cx,
 
@@ -42,16 +42,9 @@ pub fn App(cx: Scope) -> impl IntoView {
             </nav>
 
             <main>
-                <fieldset title="Get the prefered:">
-                    <ActionForm action=prefers_headers_action>
-                        <select name="value">
-                            <option value="color-scheme">"Color scheme"</option>
-                            <option value="contrast">"Contrast"</option>
-                            <option value="reduced-motion">"Color scheme"</option>
-                        </select>
-                        <button type="submit">"Go!"</button>
-                    </ActionForm>
-                </fieldset>
+                <Routes>
+                    <Route path="" view=move |cx| view! { cx, <Main/> } />
+                </Routes>
             </main>
         </Router>
     }
