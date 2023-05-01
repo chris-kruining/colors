@@ -41,11 +41,9 @@ pub fn App(cx: Scope) -> impl IntoView {
                 <DarkModeToggle />
             </nav>
 
-            <main>
-                <Routes>
-                    <Route path="" view=move |cx| view! { cx, <Main/> } />
-                </Routes>
-            </main>
+            <Routes>
+                <Route path="" view=move |cx| view! { cx, <Main/> } />
+            </Routes>
         </Router>
     }
 }

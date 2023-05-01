@@ -1,9 +1,12 @@
 use core::fmt;
 use leptos::*;
-use serde::{Serialize, Deserialize};
+use std::default;
+use std::str::FromStr;
+use strum::EnumString;
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone)]
 pub enum ReducedMotion {
+    #[default]
     NoPreference,
     Reduce,
 }
@@ -17,8 +20,9 @@ impl fmt::Display for ReducedMotion {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone)]
 pub enum Contrast {
+    #[default]
     NoPreference,
     More,
     Less,
@@ -36,8 +40,9 @@ impl fmt::Display for Contrast {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone)]
 pub enum ColorScheme {
+    #[default]
     NoPreference,
     Dark,
     Light,
@@ -53,8 +58,9 @@ impl fmt::Display for ColorScheme {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Default, Debug, Clone)]
 pub enum ForcedColors {
+    #[default]
     NoPreference,
     Active,
 }
@@ -68,31 +74,39 @@ impl fmt::Display for ForcedColors {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, EnumString)]
 pub enum Prefers {
+    #[strum(serialize = "prefers-contrast")]
     Contrast(Contrast),
+    #[strum(serialize = "prefers-color-scheme")]
     ColorScheme(ColorScheme),
+    #[strum(serialize = "prefers-reduced-motion")]
+    ReducedMotion(ReducedMotion),
+    #[strum(serialize = "forced-colors")]
     ForcedColors(ForcedColors),
 }
 
-impl fmt::Display for Prefers {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        match self {
-            Prefers::Contrast(contrast) => write!(f, "prefers-contrast: {contrast}"),
-            Prefers::ColorScheme(color_scheme) => write!(f, "prefers-color-scheme: {color_scheme}"),
-            Prefers::ForcedColors(forced_colors) => write!(f, "forced-colors: {forced_colors}"),
-        }
-    }
-}
+// impl fmt::Display for Prefers {
+//     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+//         match self {
+//             Prefers::Contrast(contrast) => write!(f, "prefers-contrast: {contrast}"),
+//             Prefers::ColorScheme(color_scheme) => write!(f, "prefers-color-scheme: {color_scheme}"),
+//             Prefers::ForcedColors(forced_colors) => write!(f, "forced-colors: {forced_colors}"),
+//         }
+//     }
+// }
 
 #[server(PrefersHeaders, "/api")]
-pub async fn prefers_headers(cx: Scope, value: Prefers) -> Result<bool, ServerFnError> {
+pub async fn prefers_headers(cx: Scope, value: String) -> Result<bool, ServerFnError> {
     use actix_web::HttpRequest;
+
+    let value = Prefers::from_str(&value);
 
     if let Some(request) = use_context::<HttpRequest>(cx) {
         println!("WOOT");
-    
-        dbg!(value);
+
+        let _ = dbg!(request);
+        let _ = dbg!(value);
     }
 
     Ok(false)
