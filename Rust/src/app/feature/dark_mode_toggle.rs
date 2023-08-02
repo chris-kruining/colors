@@ -5,8 +5,8 @@ use leptos_router::{ActionForm, ActionFormProps};
 
 cfg_if! {
     if #[cfg(feature="ssr")] {
-        fn initial_prefers_dark(cx: Scope) -> bool {
-            use_context::<actix_web::HttpRequest>(cx)
+        fn initial_prefers_dark() -> bool {
+            use_context::<actix_web::HttpRequest>()
                 .and_then(|req| {
                     req.cookies().map(|cookies| {
                         cookies
@@ -18,7 +18,7 @@ cfg_if! {
         }
     }
     else {
-        fn initial_prefers_dark(_cx: Scope) -> bool {
+        fn initial_prefers_dark() -> bool {
             use wasm_bindgen::JsCast;
 
             let doc = document().dyn_into::<web_sys::HtmlDocument>().unwrap();
@@ -28,19 +28,18 @@ cfg_if! {
         }
     }
 }
+
 #[server(ToggleDarkMode, "/api")]
-pub async fn toggle_dark_mode(cx: Scope, prefers_dark: bool) -> Result<bool, ServerFnError> {
+pub async fn toggle_dark_mode(prefers_dark: bool) -> Result<bool, ServerFnError> {
     use actix_web::http::header::{HeaderMap, HeaderValue, SET_COOKIE};
     use leptos_actix::{ResponseOptions, ResponseParts};
 
-    let response =
-        use_context::<ResponseOptions>(cx).expect("to have leptos_actix::ResponseOptions provided");
+    let response = use_context::<ResponseOptions>().expect("to have leptos_actix::ResponseOptions provided");
     let mut response_parts = ResponseParts::default();
     let mut headers = HeaderMap::new();
     headers.insert(
         SET_COOKIE,
-        HeaderValue::from_str(&format!("darkmode={prefers_dark}; Path=/"))
-            .expect("to create header value"),
+        HeaderValue::from_str(&format!("darkmode={prefers_dark}; Path=/")).expect("to create header value"),
     );
     response_parts.headers = headers;
 
@@ -51,10 +50,10 @@ pub async fn toggle_dark_mode(cx: Scope, prefers_dark: bool) -> Result<bool, Ser
 }
 
 #[component]
-pub fn DarkModeToggle(cx: Scope) -> impl IntoView {
-    let initial = initial_prefers_dark(cx);
+pub fn DarkModeToggle() -> impl IntoView {
+    let initial = initial_prefers_dark();
 
-    let toggle_dark_mode_action = create_server_action::<ToggleDarkMode>(cx);
+    let toggle_dark_mode_action = create_server_action::<ToggleDarkMode>();
     let input = toggle_dark_mode_action.input();
     let value = toggle_dark_mode_action.value();
 
@@ -73,8 +72,6 @@ pub fn DarkModeToggle(cx: Scope) -> impl IntoView {
     };
 
     view! {
-        cx,
-
         <Meta name="color-scheme" content=color_scheme />
 
         <ActionForm action=toggle_dark_mode_action>

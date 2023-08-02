@@ -1,501 +1,457 @@
 :root {
-        color-scheme: dark light;
-        
-        /*=============== KNOBS ================*/
-        --accent-offset: 30;
-        --surface-shadow: var(--hue) 10% 20%;
-        --shadow-strength: .02;
+    color-scheme: dark light;
     
-        --saturation-bias: 0;
-        --saturation-value: .5;
-        --saturation: calc(var(--saturation-value) + var(--saturation-bias));
+    /*=============== KNOBS ================*/
+    --accent-offset: 30;
+    --surface-shadow: var(--hue) 10% 20%;
+    --shadow-strength: .02;
+
+    --chromaticity-bias: 0;
+    --chromaticity-value: .25;
+    --chromaticity: calc(var(--chromaticity-value) + var(--chromaticity-bias));
+
+    --lightness-bias: 0;
+    --lightness-value: .4;
+    --lightness: calc(var(--lightness-value) + var(--lightness-bias));
     
-        --lightness-bias: 0;
-        --lightness-value: .5;
-        --lightness: calc(var(--lightness-value) + var(--lightness-bias));
-        
-        
-        /*=============== INFO =================*/
-        --info-hue: 203;
-        --info-saturation-bias: 0;
-        --info-lightness-bias: 0;
-        
-        --info-hsl:
-            var(--info-hue)
-            calc(100% * (var(--saturation) + var(--info-saturation-bias)))
-            calc(100% * (var(--lightness) + var(--info-lightness-bias)));
-        --info: hsl(var(--info-hsl));
-        
-        
-        
-        /*============== SUCCESS ================*/
-        --success-hue: 120;
-        --success-saturation-bias: 0;
-        --success-lightness-bias: 0;
-        
-        --success-hsl:
-            var(--success-hue)
-            calc(100% * (var(--saturation) + var(--success-saturation-bias)))
-            calc(100% * (var(--lightness) + var(--success-lightness-bias)));
-        --success: hsl(var(--success-hsl));
-        
-        
-        
-        /*============== WARNING ================*/
-        --warning-hue: 40;
-        --warning-saturation-bias: 0;
-        --warning-lightness-bias: 0;
-        
-        --warning-hsl:
-            var(--warning-hue)
-            calc(100% * (var(--saturation) + var(--warning-saturation-bias)))
-            calc(100% * (var(--lightness) + var(--warning-lightness-bias)));
-        --warning: hsl(var(--warning-hsl));
-        
-        
-        
-        /*============== FAILURE ================*/
-        --failure-hue: 2;
-        --failure-saturation-bias: 0;
-        --failure-lightness-bias: 0;
-        
-        --failure-hsl:
-            var(--failure-hue)
-            calc(100% * (var(--saturation) + var(--failure-saturation-bias)))
-            calc(100% * (var(--lightness) + var(--failure-lightness-bias)));
-        --failure: hsl(var(--failure-hsl));
-        
-        
-        
-        /*================ BRAND =================*/
-        --hue: 196;
-        --light-saturation: .66;
-        --dark-saturation: calc(var(--light-saturation) * .6);
-        --light-lightness: .57;
-        --dark-lightness: calc(var(--light-saturation) * .75);
-        
-        --brand-hsl: var(--hue) calc(100% * var(--saturation)) calc(100% * var(--lightness));
-        
-        --brand: hsl(var(--brand-hsl));
-        
-        
-        
-        /*============ PRIMARY ACCENT ==============*/
-        --primary-hue: calc(var(--hue) + 180 + var(--accent-offset));
-        
-        --primary-fg-hsl: calc(var(--primary-hue) + 180)    calc(100% * var(--saturation)) calc(100% * var(--lightness));
-        --primary-bg-hsl: var(--primary-hue)                calc(100% * var(--saturation)) calc(100% * var(--lightness));
-        
-        --primary-fg: hsl(var(--primary-fg-hsl));
-        --primary-bg: hsl(var(--primary-bg-hsl));
-        
-        
-        
-        /*=========== SECONDARY ACCENT =============*/
-        --secondary-hue: calc(var(--hue) + 180 - var(--accent-offset));
-        
-        --secondary-fg-hsl: calc(var(--secondary-hue) + 180)    calc(100% * var(--saturation)) calc(100% * var(--lightness));
-        --secondary-bg-hsl: var(--secondary-hue)                calc(100% * var(--saturation)) calc(100% * var(--lightness));
-        
-        --secondary-fg: hsl(var(--secondary-fg-hsl));
-        --secondary-bg: hsl(var(--secondary-bg-hsl));
-        
-        
-        
-        /*================= TEXT =================*/
-        --text-saturation: .2;
-        --text-bias: 0;
-        --light-text-lightness: .1;
-        --light-text-factor: 1;
-        --dark-text-lightness: .9;
-        --dark-text-factor: -1;
-        
-        --text1-hsl:
-            var(--hue)
-            calc(100% * var(--text-saturation))
-            calc(
-                100% * (var(--text-lightness)
-                + (0 * var(--text-factor) * .2)
-                - (var(--text-factor) * var(--text-bias)))
-            );
-        --text2-hsl:
-            var(--hue)
-            calc(100% * (var(--text-saturation) / 2))
-            calc(
-                100% * (var(--text-lightness)
-                + (1 * var(--text-factor) * .2)
-                - (var(--text-factor) * var(--text-bias)))
-            );
-        
-        --text1: hsl(var(--text1-hsl));
-        --text2: hsl(var(--text2-hsl));
-        
-        
-        
-        /*=============== SURFACES ================*/
-        --surfaces-saturation: .1;
-        --surfaces-bias: 0;
-        --light-surfaces-lightness: .95;
-        --light-surfaces-factor: 1;
-        --dark-surfaces-lightness: .1;
-        --dark-surfaces-factor: -1;
-        
-        --surface1-hsl:
-            var(--hue)
-            calc(100% * var(--surfaces-saturation))
-            calc(
-                100% * (var(--surfaces-lightness)
-                - (var(--surfaces-factor) * .00)
-                + (var(--surfaces-factor) * var(--surfaces-bias)))
-            );
-        --surface2-hsl:
-            var(--hue)
-            calc(100% * var(--surfaces-saturation))
-            calc(
-                100% * (var(--surfaces-lightness)
-                - (var(--surfaces-factor) * .05)
-                + (var(--surfaces-factor) * var(--surfaces-bias)))
-            );
-        --surface3-hsl:
-            var(--hue)
-            calc(100% * var(--surfaces-saturation))
-            calc(
-                100% * (var(--surfaces-lightness)
-                - (var(--surfaces-factor) * .10)
-                + (var(--surfaces-factor) * var(--surfaces-bias)))
-            );
-        --surface4-hsl:
-            var(--hue)
-            calc(100% * var(--surfaces-saturation))
-            calc(
-                100% * (var(--surfaces-lightness)
-                - (var(--surfaces-factor) * .15)
-                + (var(--surfaces-factor) * var(--surfaces-bias)))
-            );
-        
-        --surface1: hsl(var(--surface1-hsl));
-        --surface2: hsl(var(--surface2-hsl));
-        --surface3: hsl(var(--surface3-hsl));
-        --surface4: hsl(var(--surface4-hsl));
-    }
     
-    @media screen and (prefers-color-scheme: light) {
-        :root {
-            color-scheme: light;
+    /*=============== INFO =================*/
+    --info-hue: 203;
+    --info-chromaticity-bias: 0;
+    --info-lightness-bias: 0;
     
-            --saturation-value: var(--light-saturation);
-            --lightness-value: var(--light-saturation);
+    --info-lch:
+        calc(100% * (var(--lightness) + var(--info-lightness-bias)))
+        calc(var(--chromaticity) + var(--info-chromaticity-bias))
+        var(--info-hue);
+    --info: oklch(var(--info-lch));
     
-            --text-factor: var(--light-text-factor);
-            --text-lightness: var(--light-text-lightness);
     
-            --surfaces-factor: var(--light-surfaces-factor);
-            --surfaces-lightness: var(--light-surfaces-lightness);
     
-            --surface-shadow: var(--hue) 10% 20%;
-            --shadow-strength: .02;
-        }
-    }
+    /*============== SUCCESS ================*/
+    --success-hue: 120;
+    --success-chromaticity-bias: 0;
+    --success-lightness-bias: 0;
     
-    @media screen and (prefers-color-scheme: dark) {
-        :root {
-            color-scheme: dark;
+    --success-lch:
+        calc(100% * (var(--lightness) + var(--success-lightness-bias)))
+        calc(var(--chromaticity) + var(--success-chromaticity-bias))
+        var(--success-hue);
+    --success: oklch(var(--success-lch));
     
-            --saturation-value: var(--dark-saturation);
-            --lightness-value: var(--dark-saturation);
     
-            --text-factor: var(--dark-text-factor);
-            --text-lightness: var(--dark-text-lightness);
     
-            --surfaces-factor: var(--dark-surfaces-factor);
-            --surfaces-lightness: var(--dark-surfaces-lightness);
-            
-            --surface-shadow: var(--hue) 50% 3%;
-            --shadow-strength: .8;
-        }
-    }
+    /*============== WARNING ================*/
+    --warning-hue: 40;
+    --warning-chromaticity-bias: 0;
+    --warning-lightness-bias: 0;
     
-    html[color-scheme="light"] {
+    --warning-lch:
+        calc(100% * (var(--lightness) + var(--warning-lightness-bias)))
+        calc(var(--chromaticity) + var(--warning-chromaticity-bias))
+        var(--warning-hue);
+    --warning: oklch(var(--warning-lch));
+    
+    
+    
+    /*============== FAILURE ================*/
+    --failure-hue: 2;
+    --failure-chromaticity-bias: -.1;
+    --failure-lightness-bias: 0;
+    
+    --failure-lch:
+        calc(100% * (var(--lightness) + var(--failure-lightness-bias)))
+        calc(var(--chromaticity) + var(--failure-chromaticity-bias))
+        var(--failure-hue);
+    --failure: oklch(var(--failure-lch));
+    
+    
+    
+    /*================ BRAND =================*/
+    --hue: 196;
+    
+    --brand-lch: 
+        calc(100% * var(--lightness))
+        var(--chromaticity)
+        var(--hue);
+    --brand: oklch(var(--brand-lch));
+    
+    
+    
+    /*============ PRIMARY ACCENT ==============*/
+    --primary-hue: calc(var(--hue) + 180 + var(--accent-offset));
+    
+    --primary-fg-lch: calc(100% * var(--lightness)) var(--chromaticity) calc(var(--primary-hue) + 180);
+    --primary-bg-lch: calc(100% * var(--lightness)) var(--chromaticity) var(--primary-hue);
+    
+    --primary-fg: oklch(var(--primary-fg-lch));
+    --primary-bg: oklch(var(--primary-bg-lch));
+    
+    
+    
+    /*=========== SECONDARY ACCENT =============*/
+    --secondary-hue: calc(var(--hue) + 180 - var(--accent-offset));
+    
+    --secondary-fg-lch: calc(100% * var(--lightness)) var(--chromaticity) calc(var(--secondary-hue) + 180);
+    --secondary-bg-lch: calc(100% * var(--lightness)) var(--chromaticity) var(--secondary-hue);
+    
+    --secondary-fg: oklch(var(--secondary-fg-lch));
+    --secondary-bg: oklch(var(--secondary-bg-lch));
+    
+    
+    
+    /*================= TEXT =================*/
+    --text-lightness: .9;
+    --text-chromaticity: .025;
+    --text-factor: 1;
+    --text-bias: 0;
+    
+    --text1-lch:
+        calc(
+            100% * (var(--text-lightness)
+            + (0 * var(--text-factor) * .2)
+            - (var(--text-factor) * var(--text-bias)))
+        )
+        var(--text-chromaticity)
+        var(--hue);
+    --text2-lch:
+        calc(
+            100% * (var(--text-lightness)
+            + (1 * var(--text-factor) * .2)
+            - (var(--text-factor) * var(--text-bias)))
+        )
+        calc(var(--text-chromaticity) / 2)
+        var(--hue);
+    
+    --text1: oklch(var(--text1-lch));
+    --text2: oklch(var(--text2-lch));
+    
+    
+    
+    /*=============== SURFACES ================*/
+    --surfaces-chromaticity: .01;
+    --surfaces-bias: 0;
+    
+    --surface1-lch:
+        calc(
+            100% * (var(--surfaces-lightness)
+            - (var(--surfaces-factor) * .00)
+            + (var(--surfaces-factor) * var(--surfaces-bias)))
+        )
+        var(--surfaces-chromaticity)
+        var(--hue);
+    --surface2-lch:
+        calc(
+            100% * (var(--surfaces-lightness)
+            - (var(--surfaces-factor) * .05)
+            + (var(--surfaces-factor) * var(--surfaces-bias)))
+        )
+        var(--surfaces-chromaticity)
+        var(--hue);
+    --surface3-lch:
+        calc(
+            100% * (var(--surfaces-lightness)
+            - (var(--surfaces-factor) * .10)
+            + (var(--surfaces-factor) * var(--surfaces-bias)))
+        )
+        var(--surfaces-chromaticity)
+        var(--hue);
+    --surface4-lch:
+        calc(
+            100% * (var(--surfaces-lightness)
+            - (var(--surfaces-factor) * .15)
+            + (var(--surfaces-factor) * var(--surfaces-bias)))
+        )
+        var(--surfaces-chromaticity)
+        var(--hue);
+    
+    --surface1: oklch(var(--surface1-lch));
+    --surface2: oklch(var(--surface2-lch));
+    --surface3: oklch(var(--surface3-lch));
+    --surface4: oklch(var(--surface4-lch));
+}
+
+@media screen and (prefers-color-scheme: light) {
+    :root {
         color-scheme: light;
-    
-        --saturation-value: var(--light-saturation);
-        --lightness-value: var(--light-saturation);
-    
-        --text-factor: var(--light-text-factor);
-        --text-lightness: var(--light-text-lightness);
-    
-        --surfaces-factor: var(--light-surfaces-factor);
-        --surfaces-lightness: var(--light-surfaces-lightness);
-    
+
         --surface-shadow: var(--hue) 10% 20%;
         --shadow-strength: .02;
     }
-    
-    html[color-scheme="dark"] {
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
         color-scheme: dark;
-    
-        --saturation-value: var(--dark-saturation);
-        --lightness-value: var(--dark-saturation);
-    
-        --text-factor: var(--dark-text-factor);
-        --text-lightness: var(--dark-text-lightness);
-    
-        --surfaces-factor: var(--dark-surfaces-factor);
-        --surfaces-lightness: var(--dark-surfaces-lightness);
         
         --surface-shadow: var(--hue) 50% 3%;
         --shadow-strength: .8;
     }
+}
 
-    @media screen and (prefers-contrast: more) {
-        :root {
-            --text-bias: 1;
-            --surfaces-bias: 1;
-            --saturation-bias: 1;
-        }
-    }
+html[color-scheme="light"] {
+    color-scheme: light;
 
-    @media screen and (prefers-contrast: less) {
-        :root {
-            --text-bias: -.1;
-            --surfaces-bias: -.05;
-            --saturation-bias: -.05;
-        }
-    }
+    --surface-shadow: var(--hue) 10% 20%;
+    --shadow-strength: .02;
+}
 
-    html[contrast="more"] {
+html[color-scheme="dark"] {
+    color-scheme: dark;
+    
+    --surface-shadow: var(--hue) 50% 3%;
+    --shadow-strength: .8;
+}
+
+@media screen and (prefers-contrast: more) {
+    :root {
         --text-bias: 1;
         --surfaces-bias: 1;
-        --saturation-bias: 1;
+        --chromaticity-bias: 1;
     }
+}
 
-    html[contrast="less"] {
+@media screen and (prefers-contrast: less) {
+    :root {
         --text-bias: -.1;
         --surfaces-bias: -.05;
-        --saturation-bias: -.05;
+        --chromaticity-bias: -.05;
     }
-    
-    * {
-        box-sizing: border-box;
-        margin: 0;
-    }
-    
-    html {
-        block-size: 100%;
-        background-color: var(--surface1);
-        color: var(--text1);
-        accent-color: var(--brand);
-    }
-    
-    body {
-        min-block-size: 100%;
-        font-family: system-ui, sans-serif;
-        padding: 5vmax;
-        display: grid;
-        place-content: center;
-        gap: 5vmax;
-        --size: 20ch;
-    }
-    
-    main {
-        display: flex;
-        flex-flow: row wrap;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-        gap: 10vmax 10vmin;
-    }
-    
-    section {
-        display: grid;
-        gap: 2.5vh;
-    }
-    
-    h1 {
-        font-weight: 100;
-    }
-    
-    p {
-        max-inline-size: 35ch;
-        font-size: 1.25rem;
-        line-height: 1.5;
-    }
-    
-    header {
-        display: inline-grid;
-        gap: 1ch;
-    }
-    
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 2ch;
-    }
-    
-    form > b {
-        margin-block-start: .5em;
-    }
-    
-    form > div {
-        display: inline-flex;
-        align-items: center;
-        gap: .75ch;
-    }
-    
+}
+
+html[contrast="more"] {
+    --text-bias: 1;
+    --surfaces-bias: 1;
+    --chromaticity-bias: 1;
+}
+
+html[contrast="less"] {
+    --text-bias: -.1;
+    --surfaces-bias: -.05;
+    --chromaticity-bias: -.05;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html {
+    block-size: 100%;
+    background-color: var(--surface1);
+    color: var(--text1);
+    accent-color: var(--brand);
+}
+
+body {
+    min-block-size: 100%;
+    font-family: system-ui, sans-serif;
+    padding: 5vmax;
+    display: grid;
+    place-content: center;
+    gap: 5vmax;
+    --size: 20ch;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    gap: 10vmax 10vmin;
+}
+
+section {
+    display: grid;
+    gap: 2.5vh;
+}
+
+h1 {
+    font-weight: 100;
+}
+
+p {
+    max-inline-size: 35ch;
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+header {
+    display: inline-grid;
+    gap: 1ch;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 2ch;
+}
+
+form > b {
+    margin-block-start: .5em;
+}
+
+form > div {
+    display: inline-flex;
+    align-items: center;
+    gap: .75ch;
+}
+
+.surface-samples {
+    display: grid;
+    grid-template-columns: var(--size) var(--size);
+    grid-auto-rows: var(--size);
+    gap: 2ch;
+}
+
+@media (max-width: 480px) {
     .surface-samples {
-        display: grid;
-        grid-template-columns: var(--size) var(--size);
-        grid-auto-rows: var(--size);
-        gap: 2ch;
+        --size: 40vw;
     }
-    
-    @media (max-width: 480px) {
-        .surface-samples {
-            --size: 40vw;
-        }
-    }
-    
-    .surface-samples > * {
-        border-radius: 1rem;
-        display: grid;
-        place-content: center;
-        font-size: 3rem;
-        font-weight: 200;
-        border: 1px solid hsl(var(--hue) 10% calc(50% - (100% * var(--text-factor) * var(--text-bias))) / calc(15% + (100% * var(--text-bias))));
-    }
-    
-    .text-samples {
-        display: grid;
-        gap: 1.5ch;
-    }
-    
-    .text-samples > h1 {
-        font-size: 2.5rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 1ch;
-    }
+}
 
-    .status-samples {
-        grid-auto-flow: column;
-        grid: auto auto / repeat(4, auto);
-        gap: 2ch;
-    }
+.surface-samples > * {
+    border-radius: 1rem;
+    display: grid;
+    place-content: center;
+    font-size: 3rem;
+    font-weight: 200;
+    border: 1px solid oklch(var(--hue) 10% calc(50% - (100% * var(--text-factor) * var(--text-bias))) / calc(15% + (100% * var(--text-bias))));
+}
 
-    .status-samples > h1 {
-        grid-column: span 4;
-        display: grid;
-        justify-items: center;
-    }
+.text-samples {
+    display: grid;
+    gap: 1.5ch;
+}
 
-    .status-samples > h2 {
-        display: grid;
-        justify-items: center;
-        gap: 2ch;
-    }
+.text-samples > h1 {
+    font-size: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 1ch;
+}
 
-    .status-samples .block {
-        border-radius: 1rem;
-        display: grid;
-        place-content: center;
-        inline-size: var(--size);
-        block-size: var(--size);
-        font-size: 1rem;
-        font-weight: 200;
-    }
-    
-    .info {
-        color: var(--text1);
-        background-color: var(--info);
-    }
-    
-    .success {
-        color: var(--text1);
-        background-color: var(--success);
-    }
-    
-    .warning {
-        color: var(--text1);
-        background-color: var(--warning);
-    }
-    
-    .failure {
-        color: var(--text1);
-        background-color: var(--failure);
-    }
-    
-    .brand {
-        color: var(--text1);
-        background-color: var(--brand);
-    }
-    
-    .primary {
-        color: var(--primary-fg);
-        background-color: var(--primary-bg);
-    }
-    
-    .secondary {
-        color: var(--secondary-fg);
-        background-color: var(--secondary-bg);
-    }
-    
-    .surface1 {
-        background-color: var(--surface1);
-        color: var(--text2);
-    }
-    
-    .surface2 {
-        background-color: var(--surface2);
-        color: var(--text2);
-    }
-    
-    .surface3 {
-        background-color: var(--surface3);
-        color: var(--text1);
-    }
-    
-    .surface4 {
-        background-color: var(--surface4);
-        color: var(--text1);
-    }
-    
-    .text1 {
-        color: var(--text1);
-    }
-    
-    p.text1 {
-        font-weight: 200;
-    }
-    
-    .text2 {
-        color: var(--text2);
-    }
-    
-    .swatch {
-        display: inline-block;
-        flex-shrink: 0;
-        inline-size: 1.5ch;
-        block-size: 1.5ch;
-        border-radius: 50%;
-        cursor: pointer;
-    }
-    
-    .swatch.primary:nth-last-of-type(1) { background-color: var(--primary-fg); }
-    .swatch.primary:nth-last-of-type(2) { background-color: var(--primary-bg); }
-    
-    .swatch.secondary:nth-last-of-type(1) { background-color: var(--secondary-fg); }
-    .swatch.secondary:nth-last-of-type(2) { background-color: var(--secondary-bg); }
-    
-    .swatch.text1 { background-color: var(--text1); }
-    .swatch.text2 { background-color: var(--text2); }
-    
-    .rad-shadow {
-        box-shadow:
-            0 2.8px 2.2px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),
-            0 6.7px 5.3px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .01)),
-            0 12.5px 10px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .02)),
-            0 22.3px 17.9px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .02)),
-            0 41.8px 33.4px hsl(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),
-            0 100px 80px hsl(var(--surface-shadow) / var(--shadow-strength))
-        ;
-    }
+.status-samples {
+    grid-auto-flow: column;
+    grid: auto auto / repeat(4, auto);
+    gap: 2ch;
+}
+
+.status-samples > h1 {
+    grid-column: span 4;
+    display: grid;
+    justify-items: center;
+}
+
+.status-samples > h2 {
+    display: grid;
+    justify-items: center;
+    gap: 2ch;
+}
+
+.status-samples .block {
+    border-radius: 1rem;
+    display: grid;
+    place-content: center;
+    inline-size: var(--size);
+    block-size: var(--size);
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+.info {
+    color: var(--text1);
+    background-color: var(--info);
+}
+
+.success {
+    color: var(--text1);
+    background-color: var(--success);
+}
+
+.warning {
+    color: var(--text1);
+    background-color: var(--warning);
+}
+
+.failure {
+    color: var(--text1);
+    background-color: var(--failure);
+}
+
+.brand {
+    color: var(--text1);
+    background-color: var(--brand);
+}
+
+.primary {
+    color: var(--primary-fg);
+    background-color: var(--primary-bg);
+}
+
+.secondary {
+    color: var(--secondary-fg);
+    background-color: var(--secondary-bg);
+}
+
+.surface1 {
+    background-color: var(--surface1);
+    color: var(--text2);
+}
+
+.surface2 {
+    background-color: var(--surface2);
+    color: var(--text2);
+}
+
+.surface3 {
+    background-color: var(--surface3);
+    color: var(--text1);
+}
+
+.surface4 {
+    background-color: var(--surface4);
+    color: var(--text1);
+}
+
+.text1 {
+    color: var(--text1);
+}
+
+p.text1 {
+    font-weight: 200;
+}
+
+.text2 {
+    color: var(--text2);
+}
+
+.swatch {
+    display: inline-block;
+    flex-shrink: 0;
+    inline-size: 1.5ch;
+    block-size: 1.5ch;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.swatch.primary:nth-last-of-type(1) { background-color: var(--primary-fg); }
+.swatch.primary:nth-last-of-type(2) { background-color: var(--primary-bg); }
+
+.swatch.secondary:nth-last-of-type(1) { background-color: var(--secondary-fg); }
+.swatch.secondary:nth-last-of-type(2) { background-color: var(--secondary-bg); }
+
+.swatch.text1 { background-color: var(--text1); }
+.swatch.text2 { background-color: var(--text2); }
+
+.rad-shadow {
+    box-shadow:
+        0 2.8px 2.2px oklch(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),
+        0 6.7px 5.3px oklch(var(--surface-shadow) / calc(var(--shadow-strength) + .01)),
+        0 12.5px 10px oklch(var(--surface-shadow) / calc(var(--shadow-strength) + .02)),
+        0 22.3px 17.9px oklch(var(--surface-shadow) / calc(var(--shadow-strength) + .02)),
+        0 41.8px 33.4px oklch(var(--surface-shadow) / calc(var(--shadow-strength) + .03)),
+        0 100px 80px oklch(var(--surface-shadow) / var(--shadow-strength))
+    ;
+}

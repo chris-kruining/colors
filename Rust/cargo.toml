@@ -12,10 +12,10 @@ actix-web = { version = "4", optional = true, features = [ "macros" ] }
 console_error_panic_hook = "0.1"
 console_log = "0.2"
 cfg-if = "1"
-leptos = { version = "0.2", default-features = false, features = [ "serde" ] }
-leptos_meta = { version = "0.2", default-features = false }
-leptos_actix = { version = "0.2", optional = true }
-leptos_router = { version = "0.2", default-features = false }
+leptos = { version = "0.5.0-alpha2", features = [ "serde", "nightly" ] }
+leptos_meta = { version = "0.5.0-alpha2", features = [ "nightly" ] }
+leptos_actix = { version = "0.5.0-alpha2", optional = true, features = [] }
+leptos_router = { version = "0.5.0-alpha2", features = [ "nightly" ] }
 log = "0.4"
 simple_logger = "4"
 wasm-bindgen = "0.2"
@@ -24,6 +24,8 @@ web-sys = { version = "0.3.61", features = [ "HtmlDocument" ] }
 thiserror = "1.0.40"
 http = "0.2.9"
 strum = { version = "0.24", features = [ "derive" ] }
+wasm-cookies = "0.2.1"
+papelito = {git = "https://github.com/msmaiaa/papelito"}
 
 [features]
 default = ["hydrate"]
@@ -38,7 +40,8 @@ site-root = "target/site"
 # The site-root relative folder where all compiled output (JS, WASM and CSS) is written
 # Defaults to pkg	
 site-pkg-dir = "pkg"
-# [Optional] The source CSS file. If it ends with .sass or .scss then it will be compiled by dart-sass into CSS. The CSS is optimized by Lightning CSS before being written to <site-root>/<site-pkg>/app.css
+# [Optional] The source CSS file. If it ends with .sass or .scss then it will be compiled by dart-sass into CSS.
+# The CSS is optimized by Lightning CSS before being written to <site-root>/<site-pkg>/app.css
 style-file = "style/main.scss"
 # Assets source dir. All files found here will be copied and synchronized to site-root.
 # The assets-dir cannot have a sub directory with the same name/path as site-pkg-dir.

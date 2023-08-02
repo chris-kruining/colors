@@ -1,38 +1,70 @@
 use crate::app::feature::prefers::PrefersHeaders;
+use crate::app::feature::theme::{get_hue as initial_hue, set_hue as set_hue_action};
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
+use papelito::*;
 
 #[component]
-pub fn Main(cx: Scope) -> impl IntoView {
-    let prefers_headers_action = create_server_action::<PrefersHeaders>(cx);
+pub fn Main() -> impl IntoView {
 
-    let (hue, set_hue) = create_signal(cx, 100);
+    // let editor_content = create_rw_signal(cx, String::new());
+    
+    // let classes = PapelitoClasses {
+    //     actionbar: "rte-actionbar".to_string(),
+    //     button: "rte-button".to_string(),
+    //     content: "rte-content".to_string(),
+    //     selected: "rte-button-selected".to_string(),
+    //     editor: "rte-editor".to_string(),
+    // };
+    
+    // //  Use the ActionsBuilder struct to build the action bar (it is a optional parameter)
+    // //  let actions = ActionsBuilder::new().with_bold().with_heading1().build();
+    // let actions = ActionsBuilder::new().with_default_actions().build();
+
+
+
+
+
+
+
+
+
+    let prefers_headers_action = create_server_action::<PrefersHeaders>();
+    // let set_hue_action = create_server_action::<ThemeSetHue>();
+
+    let (hue, set_hue) = create_signal(initial_hue());
 
     let hue_change = move |ev| {
         set_hue(event_target_value(&ev).parse::<i32>().unwrap());
     };
 
+    let hue_changed = move |ev| {
+        spawn_local(async move {
+            let _ = set_hue_action(event_target_value(&ev).parse::<i32>().unwrap()).await;
+        });
+    };
+
     let style = move || format!("--hue: {};", hue());
 
     view! {
-        cx,
-
         <Html attributes=AdditionalAttributes::from(vec![ ("style", style) ]) />
+
+        // <Papelito actions=actions content_signal=editor_content classes=classes key="my_unique_key".to_string()/>
 
         <header>
             <h3>"Settings"</h3>
 
-            // <ActionForm action=prefers_headers_action>
-            //     <select name="value">
-            //         <option value="forced-colors">"Forced colors"</option>
-            //         <option value="prefers-color-scheme">"Color scheme"</option>
-            //         <option value="prefers-contrast">"Contrast"</option>
-            //         <option value="prefers-reduced-motion">"Reduced motion"</option>
-            //     </select>
+            <ActionForm action=prefers_headers_action>
+                <select name="value">
+                    <option value="forced-colors">"Forced colors"</option>
+                    <option value="prefers-color-scheme">"Color scheme"</option>
+                    <option value="prefers-contrast">"Contrast"</option>
+                    <option value="prefers-reduced-motion">"Reduced motion"</option>
+                </select>
 
-            //     <button type="submit">"Go!"</button>
-            // </ActionForm>
+                <button type="submit">"Go!"</button>
+            </ActionForm>
 
             <form id="theme-switcher">
                 <b>"Color scheme"</b>
@@ -42,7 +74,7 @@ pub fn Main(cx: Scope) -> impl IntoView {
                 <div></div>
 
                 <b>"Hue angle"</b>
-                <input id="hue" name="hue" type="range" min="0" max="360" step="1" value=hue on:input=hue_change />
+                <input id="hue" name="hue" type="range" min="0" max="360" step="1" value=hue on:input=hue_change on:pointerup=hue_changed />
             </form>
         </header>
 

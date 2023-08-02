@@ -97,12 +97,12 @@ pub enum Prefers {
 // }
 
 #[server(PrefersHeaders, "/api")]
-pub async fn prefers_headers(cx: Scope, value: String) -> Result<bool, ServerFnError> {
+pub async fn prefers_headers(value: String) -> Result<bool, ServerFnError> {
     use actix_web::HttpRequest;
 
     let value = Prefers::from_str(&value);
 
-    if let Some(request) = use_context::<HttpRequest>(cx) {
+    if let Some(request) = use_context::<HttpRequest>() {
         println!("WOOT");
 
         let _ = dbg!(request);

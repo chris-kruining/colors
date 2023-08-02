@@ -12,15 +12,15 @@ use leptos_meta::*;
 use leptos_router::*;
 
 #[component]
-pub fn App(cx: Scope) -> impl IntoView {
-    provide_meta_context(cx);
+pub fn App() -> impl IntoView {
+    provide_meta_context();
 
     cfg_if! {
         if #[cfg(feature="ssr")] {
             use leptos_actix::*;
             use http::{HeaderName, HeaderValue};
 
-            if let Some(res_options) = use_context::<ResponseOptions>(cx) {
+            if let Some(res_options) = use_context::<ResponseOptions>() {
                 res_options.append_header(
                     HeaderName::from_lowercase(b"accept-ch").unwrap(),
                     HeaderValue::from_str("Sec-CH-Prefers-Color-Scheme, Sec-CH-Prefers-Contrast").unwrap()
@@ -31,8 +31,6 @@ pub fn App(cx: Scope) -> impl IntoView {
     }
 
     view! {
-        cx,
-
         <Stylesheet id="leptos" href="/pkg/colors.css" />
         <Title text="Welcome to Leptos"/>
 
@@ -42,7 +40,7 @@ pub fn App(cx: Scope) -> impl IntoView {
             </nav>
 
             <Routes>
-                <Route path="" view=move |cx| view! { cx, <Main/> } />
+                <Route path="" view=move || view! { <Main/> } />
             </Routes>
         </Router>
     }

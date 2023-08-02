@@ -3,13 +3,6 @@ use cfg_if::cfg_if;
 cfg_if! {
     if #[cfg(feature="ssr")] {
         use leptos::*;
-        use colors::app::feature::dark_mode_toggle::ToggleDarkMode;
-        use colors::app::feature::prefers::PrefersHeaders;
-
-        fn register_server_functions() {
-            _ = ToggleDarkMode::register();
-            _ = PrefersHeaders::register();
-        }
 
         #[actix_web::main]
         async fn main() -> std::io::Result<()> {
@@ -19,12 +12,10 @@ cfg_if! {
             use leptos_actix::{generate_route_list, LeptosRoutes};
             use colors::app::*;
 
-            register_server_functions();
-
             let conf = get_configuration(None).await.unwrap();
             let addr = conf.leptos_options.site_addr;
             // Generate the list of routes in your Leptos App
-            let routes = generate_route_list(|cx| view! { cx, <App/> });
+            let routes = generate_route_list(|| view! { <App/> });
 
             HttpServer::new(move || {
                 let leptos_options = &conf.leptos_options;
@@ -35,7 +26,7 @@ cfg_if! {
                     .leptos_routes(
                         leptos_options.to_owned(),
                         routes.to_owned(),
-                        |cx| view! { cx, <App/> },
+                        || view! { <App/> },
                     )
                     .service(Files::new("/", site_root))
                     .wrap(middleware::Compress::default())
