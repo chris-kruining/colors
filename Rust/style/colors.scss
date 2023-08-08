@@ -69,6 +69,10 @@
     
     /*================ BRAND =================*/
     --hue: 196;
+    --light-saturation: .66;
+    --dark-saturation: calc(var(--light-saturation) * .6);
+    --light-lightness: .57;
+    --dark-lightness: calc(var(--light-saturation) * .75);
     
     --brand-lch: 
         calc(100% * var(--lightness))
@@ -101,10 +105,14 @@
     
     
     /*================= TEXT =================*/
-    --text-lightness: .9;
     --text-chromaticity: .025;
     --text-factor: 1;
     --text-bias: 0;
+
+    --light-text-lightness: .1;
+    --light-text-factor: 1;
+    --dark-text-lightness: .9;
+    --dark-text-factor: -1;
     
     --text1-lch:
         calc(
@@ -131,6 +139,11 @@
     /*=============== SURFACES ================*/
     --surfaces-chromaticity: .01;
     --surfaces-bias: 0;
+    --surfaces-factor: -1;
+    --light-surfaces-lightness: .95;
+    --light-surfaces-factor: 1;
+    --dark-surfaces-lightness: .1;
+    --dark-surfaces-factor: -1;
     
     --surface1-lch:
         calc(
@@ -175,6 +188,15 @@
     :root {
         color-scheme: light;
 
+        --saturation-value: var(--light-saturation);
+        --lightness-value: var(--light-saturation);
+
+        --text-factor: var(--light-text-factor);
+        --text-lightness: var(--light-text-lightness);
+
+        --surfaces-factor: var(--light-surfaces-factor);
+        --surfaces-lightness: var(--light-surfaces-lightness);
+
         --surface-shadow: var(--hue) 10% 20%;
         --shadow-strength: .02;
     }
@@ -183,6 +205,15 @@
 @media screen and (prefers-color-scheme: dark) {
     :root {
         color-scheme: dark;
+
+        --saturation-value: var(--dark-saturation);
+        --lightness-value: var(--dark-saturation);
+
+        --text-factor: var(--dark-text-factor);
+        --text-lightness: var(--dark-text-lightness);
+
+        --surfaces-factor: var(--dark-surfaces-factor);
+        --surfaces-lightness: var(--dark-surfaces-lightness);
         
         --surface-shadow: var(--hue) 50% 3%;
         --shadow-strength: .8;
@@ -192,12 +223,30 @@
 html[color-scheme="light"] {
     color-scheme: light;
 
+    --saturation-value: var(--light-saturation);
+    --lightness-value: var(--light-saturation);
+
+    --text-factor: var(--light-text-factor);
+    --text-lightness: var(--light-text-lightness);
+
+    --surfaces-factor: var(--light-surfaces-factor);
+    --surfaces-lightness: var(--light-surfaces-lightness);
+
     --surface-shadow: var(--hue) 10% 20%;
     --shadow-strength: .02;
 }
 
 html[color-scheme="dark"] {
     color-scheme: dark;
+
+    --saturation-value: var(--dark-saturation);
+    --lightness-value: var(--dark-saturation);
+
+    --text-factor: var(--dark-text-factor);
+    --text-lightness: var(--dark-text-lightness);
+
+    --surfaces-factor: var(--dark-surfaces-factor);
+    --surfaces-lightness: var(--dark-surfaces-lightness);
     
     --surface-shadow: var(--hue) 50% 3%;
     --shadow-strength: .8;

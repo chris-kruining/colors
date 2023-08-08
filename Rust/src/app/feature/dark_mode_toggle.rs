@@ -1,7 +1,7 @@
 use cfg_if::cfg_if;
 use leptos::*;
-use leptos_meta::{Meta, MetaProps};
-use leptos_router::{ActionForm, ActionFormProps};
+use leptos_meta::Meta;
+use leptos_router::ActionForm;
 
 cfg_if! {
     if #[cfg(feature="ssr")] {

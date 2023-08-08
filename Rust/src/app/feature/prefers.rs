@@ -1,7 +1,5 @@
 use core::fmt;
 use leptos::*;
-use std::default;
-use std::str::FromStr;
 use strum::EnumString;
 
 #[derive(Default, Debug, Clone)]
@@ -99,6 +97,8 @@ pub enum Prefers {
 #[server(PrefersHeaders, "/api")]
 pub async fn prefers_headers(value: String) -> Result<bool, ServerFnError> {
     use actix_web::HttpRequest;
+    use std::default;
+    use std::str::FromStr;
 
     let value = Prefers::from_str(&value);
 

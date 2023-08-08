@@ -26,6 +26,9 @@ http = "0.2.9"
 strum = { version = "0.24", features = [ "derive" ] }
 wasm-cookies = "0.2.1"
 papelito = {git = "https://github.com/msmaiaa/papelito"}
+openidconnect = "3.3.0"
+anyhow = "1.0.72"
+url = "2.4.0"
 
 [features]
 default = ["hydrate"]

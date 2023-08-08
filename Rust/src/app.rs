@@ -2,10 +2,10 @@ pub mod feature;
 pub mod route;
 
 use crate::app::feature::{
-    dark_mode_toggle::{DarkModeToggle, DarkModeToggleProps},
-    prefers::PrefersHeaders,
+    dark_mode_toggle::DarkModeToggle,
+    auth::Auth,
 };
-use crate::app::route::main::{Main, MainProps};
+use crate::app::route::main::Main;
 use cfg_if::cfg_if;
 use leptos::*;
 use leptos_meta::*;
@@ -36,6 +36,7 @@ pub fn App() -> impl IntoView {
 
         <Router>
             <nav>
+                <Auth />
                 <DarkModeToggle />
             </nav>
 

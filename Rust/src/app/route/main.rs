@@ -3,7 +3,6 @@ use crate::app::feature::theme::{get_hue as initial_hue, set_hue as set_hue_acti
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
-use papelito::*;
 
 #[component]
 pub fn Main() -> impl IntoView {
