@@ -5,7 +5,10 @@ use crate::app::feature::{
     dark_mode_toggle::DarkModeToggle,
     auth::Auth,
 };
-use crate::app::route::main::Main;
+use crate::app::route::{
+    main::Main,
+    auth::redirect::Redirect
+};
 use cfg_if::cfg_if;
 use leptos::*;
 use leptos_meta::*;
@@ -35,14 +38,24 @@ pub fn App() -> impl IntoView {
         <Title text="Welcome to Leptos"/>
 
         <Router>
-            <nav>
-                <Auth />
-                <DarkModeToggle />
-            </nav>
-
             <Routes>
-                <Route path="" view=move || view! { <Main/> } />
+                <Route path="" view=Layout>
+                    <Route path="" view=Main />
+                    <Route path="auth/redirect" view=Redirect />
+                </Route>
             </Routes>
         </Router>
+    }
+}
+
+#[component]
+fn Layout() -> impl IntoView {
+    view! {
+        <nav>
+            <Auth />
+            <DarkModeToggle />
+        </nav>
+
+        <Outlet />
     }
 }
